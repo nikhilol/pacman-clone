@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://dn545rgtol8gm"]
+
+[ext_resource type="Script" path="res://Scripts/ghost.gd" id="1_cxlsj"]
+[ext_resource type="Texture2D" uid="uid://bj073r30hcjch" path="res://Sprites/ghosts/blinky.png" id="2_0pxja"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_64gyo"]
+size = Vector2(21.4286, 21.4286)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_geuxn"]
+
+[node name="Ghost" type="Node2D"]
+position = Vector2(-162, -162)
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(2.08165e-12, 2.08165e-12)
+scale = Vector2(20, 20)
+collision_layer = 4
+script = ExtResource("1_cxlsj")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(7.5, 7.5)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_0pxja")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(7.5, 7.5)
+scale = Vector2(0.7, 0.7)
+shape = SubResource("RectangleShape2D_64gyo")
+debug_color = Color(0.853779, 0.295501, 0.570367, 0.42)
+
+[node name="ShapecastRight" type="ShapeCast2D" parent="CharacterBody2D"]
+position = Vector2(20, 7.5)
+scale = Vector2(0.5, 0.74)
+shape = SubResource("RectangleShape2D_geuxn")
+target_position = Vector2(2.08165e-12, 2.08165e-12)
+
+[node name="ShapecastLeft" type="ShapeCast2D" parent="CharacterBody2D"]
+position = Vector2(-5, 7.5)
+scale = Vector2(0.5, 0.74)
+shape = SubResource("RectangleShape2D_geuxn")
+target_position = Vector2(2.08165e-12, 2.08165e-12)
+
+[node name="ShapecastUp" type="ShapeCast2D" parent="CharacterBody2D"]
+position = Vector2(7.5, -5)
+rotation = 1.5708
+scale = Vector2(0.5, 0.74)
+shape = SubResource("RectangleShape2D_geuxn")
+target_position = Vector2(2.08165e-12, 2.08165e-12)
+
+[node name="ShapecastDown" type="ShapeCast2D" parent="CharacterBody2D"]
+position = Vector2(7.5, 20)
+rotation = 1.5708
+scale = Vector2(0.5, 0.74)
+shape = SubResource("RectangleShape2D_geuxn")
+target_position = Vector2(2.08165e-12, 2.08165e-12)

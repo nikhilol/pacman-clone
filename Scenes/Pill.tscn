@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://citvtxw61q5ym"]
+
+[ext_resource type="Script" path="res://Scripts/Pill.gd" id="1_fv8wq"]
+[ext_resource type="Texture2D" uid="uid://bux32wugbwghe" path="res://Sprites/tiles/floor-tile-dot.svg" id="1_kba74"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a6yyj"]
+
+[node name="Pill" type="Node2D"]
+script = ExtResource("1_fv8wq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_kba74")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_a6yyj")
+
+[connection signal="texture_changed" from="Sprite2D" to="." method="_on_sprite_2d_texture_changed"]
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]

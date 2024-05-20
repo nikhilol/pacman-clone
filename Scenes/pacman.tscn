@@ -1,0 +1,83 @@
+[gd_scene load_steps=9 format=3 uid="uid://b4hmhr4n045ed"]
+
+[ext_resource type="Script" path="res://Scripts/pacman.gd" id="1_0iei7"]
+[ext_resource type="Texture2D" uid="uid://bi15kxajqy385" path="res://Sprites/pacman/1.png" id="2_xtxe8"]
+[ext_resource type="Texture2D" uid="uid://b48xjsjj0gk86" path="res://Sprites/pacman/2.png" id="3_pe4qa"]
+[ext_resource type="Texture2D" uid="uid://cugdxkaxqsn6o" path="res://Sprites/pacman/3.png" id="4_lslu4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r4xis"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_xtxe8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_pe4qa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_lslu4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ws2ux"]
+size = Vector2(18.75, 18.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_52hgw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ot0i7"]
+radius = 5.0
+
+[node name="CharacterBody2d" type="CharacterBody2D"]
+position = Vector2(9.09495e-13, 5.42101e-20)
+scale = Vector2(20, 20)
+script = ExtResource("1_0iei7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1.49012e-08, -2.98023e-08)
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_r4xis")
+frame_progress = 0.218001
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.8, 0.8)
+shape = SubResource("RectangleShape2D_ws2ux")
+debug_color = Color(0.926971, 3.51152e-05, 0.67036, 0.42)
+
+[node name="ShapecastRight" type="ShapeCast2D" parent="."]
+position = Vector2(12.5, 2.08165e-12)
+scale = Vector2(0.5, 0.74)
+shape = SubResource("RectangleShape2D_52hgw")
+target_position = Vector2(2.08165e-12, 2.08165e-12)
+
+[node name="ShapecastLeft" type="ShapeCast2D" parent="."]
+position = Vector2(-12.5, 2.08165e-12)
+scale = Vector2(0.5, 0.74)
+shape = SubResource("RectangleShape2D_52hgw")
+target_position = Vector2(2.08165e-12, 2.08165e-12)
+
+[node name="ShapecastUp" type="ShapeCast2D" parent="."]
+position = Vector2(-2.47955e-06, -12.5)
+rotation = 1.5708
+scale = Vector2(0.5, 0.74)
+shape = SubResource("RectangleShape2D_52hgw")
+target_position = Vector2(2.08165e-12, 2.08165e-12)
+
+[node name="ShapecastDown" type="ShapeCast2D" parent="."]
+position = Vector2(-1.71661e-06, 12.5)
+rotation = 1.5708
+scale = Vector2(0.5, 0.74)
+shape = SubResource("RectangleShape2D_52hgw")
+target_position = Vector2(2.08165e-12, 2.08165e-12)
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(1.7, 1.7)
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_ot0i7")
+debug_color = Color(0, 0.650154, 0.109404, 0.42)
+
+[connection signal="body_entered" from="Area2D" to="." method="_ghost_collision"]
